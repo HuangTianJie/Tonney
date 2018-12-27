@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ 
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+	  <Author>administer</Author>
+	  <LastAuthor>administer</LastAuthor>
+	  <Created>2016-10-10T03:10:02Z</Created>
+	  <Version>15.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+	  <WindowHeight>9384</WindowHeight>
+	  <WindowWidth>23040</WindowWidth>
+	  <WindowTopX>0</WindowTopX>
+	  <WindowTopY>0</WindowTopY>
+	  <ProtectStructure>False</ProtectStructure>
+	  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+	  <Style ss:ID="Default" ss:Name="Normal">
+	   <Alignment ss:Vertical="Center"/>
+	   <Borders/>
+	   <Font ss:FontName="宋体" x:CharSet="134" ss:Size="11" ss:Color="#000000"/>
+	   <Interior/>
+	   <NumberFormat/>
+	   <Protection/>
+	  </Style>
+ </Styles>
+   <Worksheet ss:Name="Sheet1">
+     <Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="3" x:FullColumns="1" x:FullRows="1"
+            ss:DefaultColumnWidth="48" ss:DefaultRowHeight="14.4">
+       <Column ss:Index="1" ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="37.2"/>
+       <Column ss:Index="2" ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="75.6"/>
+       <Column ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="69.6"/>
+       <Column ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="63"/>
+       <Column ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="79.8"/>
+       <Column ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="72"/>
+       <Column ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="62.4"/>
+       <Column ss:StyleID="Default" ss:AutoFitWidth="0" ss:Width="66.6"/>
+       <Row>
+         <Cell><Data ss:Type="String">#</Data></Cell>
+         <Cell ss:StyleID="s52" ss:MergeAcross="1"><Data ss:Type="String">外部计算余额</Data></Cell>
+         <Cell ss:StyleID="s53" ss:MergeAcross="2"><Data ss:Type="String">差异</Data></Cell>
+         <Cell ss:StyleID="s54" ss:MergeAcross="1"><Data ss:Type="String">内部计算余额</Data></Cell>
+       </Row>
+       <Row ss:Height="32">
+         <Cell><Data ss:Type="String">币种</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">充值提现&#10;(A)</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">钱包余额&#10;(B)</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">外部差异&#10;(A-B=W)</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">内外差异&#10;(W-N)</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">内部差异&#10;(C-D=N)</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">资产状态&#10;(C)</Data></Cell>
+         <Cell ss:StyleID="s51"><Data ss:Type="String">运算过程&#10;(D)</Data></Cell>
+       </Row>
+         <Row>
+        <Cell><Data ss:Type="String">BTC</Data></Cell>
+        <Cell><Data ss:Type="String">142.10950658</Data></Cell>
+        <Cell><Data ss:Type="String">1.13003797</Data></Cell>
+        <Cell><Data ss:Type="String">140.97946861</Data></Cell>
+        <Cell><Data ss:Type="String">-987472.40665334</Data></Cell>
+        <Cell><Data ss:Type="String">987613.38612195</Data></Cell>
+        <Cell><Data ss:Type="String">11112.00000000</Data></Cell>
+        <Cell><Data ss:Type="String">-976501.38612195</Data></Cell>
+      </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Selected/>
+   <Panes>
+    <Pane>
+      <Number>3</Number>
+      <ActiveRow>11</ActiveRow>
+      <ActiveCol>6</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

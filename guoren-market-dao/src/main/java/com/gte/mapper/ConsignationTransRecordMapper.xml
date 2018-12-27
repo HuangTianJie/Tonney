@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gte.mapper.ConsignationTransRecordMapper">
+	<resultMap id="BaseResultMap" type="com.gte.domain.ConsignationTransRecord">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="consignation_id" property="consignationId" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="sell" property="sell" jdbcType="VARCHAR" />
+		<result column="duad" property="duad" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="consignation_num" property="consignationNum" jdbcType="INTEGER" />
+		<result column="consignation_price" property="consignationPrice" jdbcType="VARCHAR" />
+		<result column="residue_num" property="residueNum" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="create_id" property="createId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	id, consignation_id, create_date, sell, duad, type, consignation_num, consignation_price, residue_num, status, create_time, update_time, create_id
+	</sql>
+
+	<select id="getList" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from consignation_trans_record
+		<where>
+		<if test="duad != null">
+			duad = #{duad}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		<if test="consignationId != null">
+			and consignation_id = #{consignationId}
+		</if>
+		<if test="createId != null">
+			and create_id = #{createId}
+		</if>
+		<if test="startDate != null">
+		and create_date &gt;= #{startDate}
+		</if>
+		<if test="endDate != null">
+			and create_date &lt;= #{endDate}
+		</if>
+	</where>
+	</select>
+</mapper>

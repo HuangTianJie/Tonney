@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gte.mapper.agent.FundFeeRuleParmMapper">
+  <resultMap id="BaseResultMap" type="com.gte.domain.agent.FundFeeRuleParm">
+    <id column="fee_rule_parm_id" jdbcType="BIGINT" property="feeRuleParmId" />
+    <result column="fee_rule_cfg_id" jdbcType="BIGINT" property="feeRuleCfgId" />
+    <result column="parm_desc" jdbcType="VARCHAR" property="parmDesc" />
+    <result column="parm_key" jdbcType="VARCHAR" property="parmKey" />
+    <result column="parm_val" jdbcType="VARCHAR" property="parmVal" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="ver_id" jdbcType="BIGINT" property="verId" />
+    <result column="cre_time" jdbcType="TIMESTAMP" property="creTime" />
+    <result column="cre_usr" jdbcType="BIGINT" property="creUsr" />
+    <result column="upd_time" jdbcType="TIMESTAMP" property="updTime" />
+    <result column="upd_usr" jdbcType="BIGINT" property="updUsr" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fee_rule_parm_id, fee_rule_cfg_id, parm_desc, parm_key, parm_val, remark, del_flg, 
+    ver_id, cre_time, cre_usr, upd_time, upd_usr
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fund_fee_rule_parm
+    where fee_rule_parm_id = #{feeRuleParmId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fund_fee_rule_parm
+    where fee_rule_parm_id = #{feeRuleParmId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gte.domain.agent.FundFeeRuleParm">
+    <selectKey keyProperty="feeRuleParmId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fund_fee_rule_parm (fee_rule_cfg_id, parm_desc, parm_key, 
+      parm_val, remark, del_flg, 
+      ver_id, cre_time, cre_usr, 
+      upd_time, upd_usr)
+    values (#{feeRuleCfgId,jdbcType=BIGINT}, #{parmDesc,jdbcType=VARCHAR}, #{parmKey,jdbcType=VARCHAR}, 
+      #{parmVal,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{delFlg,jdbcType=CHAR}, 
+      #{verId,jdbcType=BIGINT}, #{creTime,jdbcType=TIMESTAMP}, #{creUsr,jdbcType=BIGINT}, 
+      #{updTime,jdbcType=TIMESTAMP}, #{updUsr,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gte.domain.agent.FundFeeRuleParm">
+    <selectKey keyProperty="feeRuleParmId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fund_fee_rule_parm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="feeRuleCfgId != null">
+        fee_rule_cfg_id,
+      </if>
+      <if test="parmDesc != null">
+        parm_desc,
+      </if>
+      <if test="parmKey != null">
+        parm_key,
+      </if>
+      <if test="parmVal != null">
+        parm_val,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="verId != null">
+        ver_id,
+      </if>
+      <if test="creTime != null">
+        cre_time,
+      </if>
+      <if test="creUsr != null">
+        cre_usr,
+      </if>
+      <if test="updTime != null">
+        upd_time,
+      </if>
+      <if test="updUsr != null">
+        upd_usr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feeRuleCfgId != null">
+        #{feeRuleCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="parmDesc != null">
+        #{parmDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parmKey != null">
+        #{parmKey,jdbcType=VARCHAR},
+      </if>
+      <if test="parmVal != null">
+        #{parmVal,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="verId != null">
+        #{verId,jdbcType=BIGINT},
+      </if>
+      <if test="creTime != null">
+        #{creTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creUsr != null">
+        #{creUsr,jdbcType=BIGINT},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUsr != null">
+        #{updUsr,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gte.domain.agent.FundFeeRuleParm">
+    update fund_fee_rule_parm
+    <set>
+      <if test="feeRuleCfgId != null">
+        fee_rule_cfg_id = #{feeRuleCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="parmDesc != null">
+        parm_desc = #{parmDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parmKey != null">
+        parm_key = #{parmKey,jdbcType=VARCHAR},
+      </if>
+      <if test="parmVal != null">
+        parm_val = #{parmVal,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="verId != null">
+        ver_id = #{verId,jdbcType=BIGINT},
+      </if>
+      <if test="creTime != null">
+        cre_time = #{creTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creUsr != null">
+        cre_usr = #{creUsr,jdbcType=BIGINT},
+      </if>
+      <if test="updTime != null">
+        upd_time = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUsr != null">
+        upd_usr = #{updUsr,jdbcType=BIGINT},
+      </if>
+    </set>
+    where fee_rule_parm_id = #{feeRuleParmId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gte.domain.agent.FundFeeRuleParm">
+    update fund_fee_rule_parm
+    set fee_rule_cfg_id = #{feeRuleCfgId,jdbcType=BIGINT},
+      parm_desc = #{parmDesc,jdbcType=VARCHAR},
+      parm_key = #{parmKey,jdbcType=VARCHAR},
+      parm_val = #{parmVal,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      ver_id = #{verId,jdbcType=BIGINT},
+      cre_time = #{creTime,jdbcType=TIMESTAMP},
+      cre_usr = #{creUsr,jdbcType=BIGINT},
+      upd_time = #{updTime,jdbcType=TIMESTAMP},
+      upd_usr = #{updUsr,jdbcType=BIGINT}
+    where fee_rule_parm_id = #{feeRuleParmId,jdbcType=BIGINT}
+  </update>
+</mapper>

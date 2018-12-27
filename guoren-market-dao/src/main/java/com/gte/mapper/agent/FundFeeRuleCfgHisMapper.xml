@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gte.mapper.agent.FundFeeRuleCfgHisMapper">
+  <resultMap id="BaseResultMap" type="com.gte.domain.agent.FundFeeRuleCfgHis">
+    <id column="fee_rule_cfg_his_id" jdbcType="BIGINT" property="feeRuleCfgHisId" />
+    <result column="fee_rule_cfg_id" jdbcType="BIGINT" property="feeRuleCfgId" />
+    <result column="rule_nam" jdbcType="VARCHAR" property="ruleNam" />
+    <result column="fee_type" jdbcType="VARCHAR" property="feeType" />
+    <result column="fee_item" jdbcType="VARCHAR" property="feeItem" />
+    <result column="exchg_cd" jdbcType="VARCHAR" property="exchgCd" />
+    <result column="op_cd" jdbcType="VARCHAR" property="opCd" />
+    <result column="ap_role_cd" jdbcType="VARCHAR" property="apRoleCd" />
+    <result column="ar_role_cd" jdbcType="VARCHAR" property="arRoleCd" />
+    <result column="valid_stt_time" jdbcType="TIMESTAMP" property="validSttTime" />
+    <result column="valid_end_time" jdbcType="TIMESTAMP" property="validEndTime" />
+    <result column="fee_max_limit" jdbcType="DECIMAL" property="feeMaxLimit" />
+    <result column="fee_min_limit" jdbcType="DECIMAL" property="feeMinLimit" />
+    <result column="chrg_mthd" jdbcType="VARCHAR" property="chrgMthd" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="dec_proc_rule" jdbcType="VARCHAR" property="decProcRule" />
+    <result column="rule_proc_type" jdbcType="VARCHAR" property="ruleProcType" />
+    <result column="stt" jdbcType="VARCHAR" property="stt" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="del_flg" jdbcType="CHAR" property="delFlg" />
+    <result column="ver_id" jdbcType="BIGINT" property="verId" />
+    <result column="cre_usr" jdbcType="BIGINT" property="creUsr" />
+    <result column="cre_time" jdbcType="TIMESTAMP" property="creTime" />
+    <result column="upd_usr" jdbcType="BIGINT" property="updUsr" />
+    <result column="upd_time" jdbcType="TIMESTAMP" property="updTime" />
+    <result column="fee_rule_chng_apply_id" jdbcType="BIGINT" property="feeRuleChngApplyId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fee_rule_cfg_his_id, fee_rule_cfg_id, rule_nam, fee_type, fee_item, exchg_cd, op_cd, 
+    ap_role_cd, ar_role_cd, valid_stt_time, valid_end_time, fee_max_limit, fee_min_limit, 
+    chrg_mthd, priority, dec_proc_rule, rule_proc_type, stt, remark, del_flg, ver_id, 
+    cre_usr, cre_time, upd_usr, upd_time, fee_rule_chng_apply_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fund_fee_rule_cfg_his
+    where fee_rule_cfg_his_id = #{feeRuleCfgHisId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fund_fee_rule_cfg_his
+    where fee_rule_cfg_his_id = #{feeRuleCfgHisId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gte.domain.agent.FundFeeRuleCfgHis">
+    <selectKey keyProperty="feeRuleCfgHisId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fund_fee_rule_cfg_his (fee_rule_cfg_id, rule_nam, fee_type, 
+      fee_item, exchg_cd, op_cd, 
+      ap_role_cd, ar_role_cd, valid_stt_time, 
+      valid_end_time, fee_max_limit, fee_min_limit, 
+      chrg_mthd, priority, dec_proc_rule, 
+      rule_proc_type, stt, remark, 
+      del_flg, ver_id, cre_usr, cre_time, 
+      upd_usr, upd_time, fee_rule_chng_apply_id
+      )
+    values (#{feeRuleCfgId,jdbcType=BIGINT}, #{ruleNam,jdbcType=VARCHAR}, #{feeType,jdbcType=VARCHAR}, 
+      #{feeItem,jdbcType=VARCHAR}, #{exchgCd,jdbcType=VARCHAR}, #{opCd,jdbcType=VARCHAR}, 
+      #{apRoleCd,jdbcType=VARCHAR}, #{arRoleCd,jdbcType=VARCHAR}, #{validSttTime,jdbcType=TIMESTAMP}, 
+      #{validEndTime,jdbcType=TIMESTAMP}, #{feeMaxLimit,jdbcType=DECIMAL}, #{feeMinLimit,jdbcType=DECIMAL}, 
+      #{chrgMthd,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{decProcRule,jdbcType=VARCHAR}, 
+      #{ruleProcType,jdbcType=VARCHAR}, #{stt,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{delFlg,jdbcType=CHAR}, #{verId,jdbcType=BIGINT}, #{creUsr,jdbcType=BIGINT}, #{creTime,jdbcType=TIMESTAMP}, 
+      #{updUsr,jdbcType=BIGINT}, #{updTime,jdbcType=TIMESTAMP}, #{feeRuleChngApplyId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gte.domain.agent.FundFeeRuleCfgHis">
+    <selectKey keyProperty="feeRuleCfgHisId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into fund_fee_rule_cfg_his
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="feeRuleCfgId != null">
+        fee_rule_cfg_id,
+      </if>
+      <if test="ruleNam != null">
+        rule_nam,
+      </if>
+      <if test="feeType != null">
+        fee_type,
+      </if>
+      <if test="feeItem != null">
+        fee_item,
+      </if>
+      <if test="exchgCd != null">
+        exchg_cd,
+      </if>
+      <if test="opCd != null">
+        op_cd,
+      </if>
+      <if test="apRoleCd != null">
+        ap_role_cd,
+      </if>
+      <if test="arRoleCd != null">
+        ar_role_cd,
+      </if>
+      <if test="validSttTime != null">
+        valid_stt_time,
+      </if>
+      <if test="validEndTime != null">
+        valid_end_time,
+      </if>
+      <if test="feeMaxLimit != null">
+        fee_max_limit,
+      </if>
+      <if test="feeMinLimit != null">
+        fee_min_limit,
+      </if>
+      <if test="chrgMthd != null">
+        chrg_mthd,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="decProcRule != null">
+        dec_proc_rule,
+      </if>
+      <if test="ruleProcType != null">
+        rule_proc_type,
+      </if>
+      <if test="stt != null">
+        stt,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="delFlg != null">
+        del_flg,
+      </if>
+      <if test="verId != null">
+        ver_id,
+      </if>
+      <if test="creUsr != null">
+        cre_usr,
+      </if>
+      <if test="creTime != null">
+        cre_time,
+      </if>
+      <if test="updUsr != null">
+        upd_usr,
+      </if>
+      <if test="updTime != null">
+        upd_time,
+      </if>
+      <if test="feeRuleChngApplyId != null">
+        fee_rule_chng_apply_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feeRuleCfgId != null">
+        #{feeRuleCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="ruleNam != null">
+        #{ruleNam,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null">
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="feeItem != null">
+        #{feeItem,jdbcType=VARCHAR},
+      </if>
+      <if test="exchgCd != null">
+        #{exchgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="opCd != null">
+        #{opCd,jdbcType=VARCHAR},
+      </if>
+      <if test="apRoleCd != null">
+        #{apRoleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arRoleCd != null">
+        #{arRoleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="validSttTime != null">
+        #{validSttTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validEndTime != null">
+        #{validEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feeMaxLimit != null">
+        #{feeMaxLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="feeMinLimit != null">
+        #{feeMinLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="chrgMthd != null">
+        #{chrgMthd,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="decProcRule != null">
+        #{decProcRule,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleProcType != null">
+        #{ruleProcType,jdbcType=VARCHAR},
+      </if>
+      <if test="stt != null">
+        #{stt,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null">
+        #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="verId != null">
+        #{verId,jdbcType=BIGINT},
+      </if>
+      <if test="creUsr != null">
+        #{creUsr,jdbcType=BIGINT},
+      </if>
+      <if test="creTime != null">
+        #{creTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUsr != null">
+        #{updUsr,jdbcType=BIGINT},
+      </if>
+      <if test="updTime != null">
+        #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feeRuleChngApplyId != null">
+        #{feeRuleChngApplyId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gte.domain.agent.FundFeeRuleCfgHis">
+    update fund_fee_rule_cfg_his
+    <set>
+      <if test="feeRuleCfgId != null">
+        fee_rule_cfg_id = #{feeRuleCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="ruleNam != null">
+        rule_nam = #{ruleNam,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null">
+        fee_type = #{feeType,jdbcType=VARCHAR},
+      </if>
+      <if test="feeItem != null">
+        fee_item = #{feeItem,jdbcType=VARCHAR},
+      </if>
+      <if test="exchgCd != null">
+        exchg_cd = #{exchgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="opCd != null">
+        op_cd = #{opCd,jdbcType=VARCHAR},
+      </if>
+      <if test="apRoleCd != null">
+        ap_role_cd = #{apRoleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="arRoleCd != null">
+        ar_role_cd = #{arRoleCd,jdbcType=VARCHAR},
+      </if>
+      <if test="validSttTime != null">
+        valid_stt_time = #{validSttTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validEndTime != null">
+        valid_end_time = #{validEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feeMaxLimit != null">
+        fee_max_limit = #{feeMaxLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="feeMinLimit != null">
+        fee_min_limit = #{feeMinLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="chrgMthd != null">
+        chrg_mthd = #{chrgMthd,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="decProcRule != null">
+        dec_proc_rule = #{decProcRule,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleProcType != null">
+        rule_proc_type = #{ruleProcType,jdbcType=VARCHAR},
+      </if>
+      <if test="stt != null">
+        stt = #{stt,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlg != null">
+        del_flg = #{delFlg,jdbcType=CHAR},
+      </if>
+      <if test="verId != null">
+        ver_id = #{verId,jdbcType=BIGINT},
+      </if>
+      <if test="creUsr != null">
+        cre_usr = #{creUsr,jdbcType=BIGINT},
+      </if>
+      <if test="creTime != null">
+        cre_time = #{creTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updUsr != null">
+        upd_usr = #{updUsr,jdbcType=BIGINT},
+      </if>
+      <if test="updTime != null">
+        upd_time = #{updTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="feeRuleChngApplyId != null">
+        fee_rule_chng_apply_id = #{feeRuleChngApplyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where fee_rule_cfg_his_id = #{feeRuleCfgHisId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gte.domain.agent.FundFeeRuleCfgHis">
+    update fund_fee_rule_cfg_his
+    set fee_rule_cfg_id = #{feeRuleCfgId,jdbcType=BIGINT},
+      rule_nam = #{ruleNam,jdbcType=VARCHAR},
+      fee_type = #{feeType,jdbcType=VARCHAR},
+      fee_item = #{feeItem,jdbcType=VARCHAR},
+      exchg_cd = #{exchgCd,jdbcType=VARCHAR},
+      op_cd = #{opCd,jdbcType=VARCHAR},
+      ap_role_cd = #{apRoleCd,jdbcType=VARCHAR},
+      ar_role_cd = #{arRoleCd,jdbcType=VARCHAR},
+      valid_stt_time = #{validSttTime,jdbcType=TIMESTAMP},
+      valid_end_time = #{validEndTime,jdbcType=TIMESTAMP},
+      fee_max_limit = #{feeMaxLimit,jdbcType=DECIMAL},
+      fee_min_limit = #{feeMinLimit,jdbcType=DECIMAL},
+      chrg_mthd = #{chrgMthd,jdbcType=VARCHAR},
+      priority = #{priority,jdbcType=INTEGER},
+      dec_proc_rule = #{decProcRule,jdbcType=VARCHAR},
+      rule_proc_type = #{ruleProcType,jdbcType=VARCHAR},
+      stt = #{stt,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      ver_id = #{verId,jdbcType=BIGINT},
+      cre_usr = #{creUsr,jdbcType=BIGINT},
+      cre_time = #{creTime,jdbcType=TIMESTAMP},
+      upd_usr = #{updUsr,jdbcType=BIGINT},
+      upd_time = #{updTime,jdbcType=TIMESTAMP},
+      fee_rule_chng_apply_id = #{feeRuleChngApplyId,jdbcType=BIGINT}
+    where fee_rule_cfg_his_id = #{feeRuleCfgHisId,jdbcType=BIGINT}
+  </update>
+</mapper>

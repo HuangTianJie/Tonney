@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gte.mapper.agent.FundFeeRateCfgHisMapper">
+    <resultMap id="BaseResultMap" type="com.gte.domain.agent.FundFeeRateCfgHis">
+        <id column="fee_rate_cfg_his_id" jdbcType="BIGINT" property="feeRateCfgHisId"/>
+        <result column="fee_rate_cfg_id" jdbcType="BIGINT" property="feeRateCfgId"/>
+        <result column="fee_rule_cfg_id" jdbcType="BIGINT" property="feeRuleCfgId"/>
+        <result column="rate_nam" jdbcType="VARCHAR" property="rateNam"/>
+        <result column="set_mthd" jdbcType="CHAR" property="setMthd"/>
+        <result column="chrg_std_type" jdbcType="CHAR" property="chrgStdType"/>
+        <result column="chrg_std" jdbcType="VARCHAR" property="chrgStd"/>
+        <result column="stt_int_flw" jdbcType="DECIMAL" property="sttIntFlw"/>
+        <result column="end_int_flw" jdbcType="DECIMAL" property="endIntFlw"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="del_flg" jdbcType="CHAR" property="delFlg"/>
+        <result column="ver_id" jdbcType="BIGINT" property="verId"/>
+        <result column="cre_time" jdbcType="TIMESTAMP" property="creTime"/>
+        <result column="cre_usr" jdbcType="BIGINT" property="creUsr"/>
+        <result column="upd_time" jdbcType="TIMESTAMP" property="updTime"/>
+        <result column="upd_usr" jdbcType="BIGINT" property="updUsr"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    fee_rate_cfg_his_id, fee_rate_cfg_id, fee_rule_cfg_id, rate_nam, set_mthd, chrg_std_type, 
+    chrg_std, stt_int_flw, end_int_flw, remark, del_flg, ver_id, cre_time, cre_usr, upd_time, 
+    upd_usr
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fund_fee_rate_cfg_his
+        where fee_rate_cfg_his_id = #{feeRateCfgHisId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from fund_fee_rate_cfg_his
+    where fee_rate_cfg_his_id = #{feeRateCfgHisId,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.gte.domain.agent.FundFeeRateCfgHis">
+        <selectKey keyProperty="feeRateCfgHisId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into fund_fee_rate_cfg_his (fee_rate_cfg_id, fee_rule_cfg_id, rate_nam,
+        set_mthd, chrg_std_type, chrg_std,
+        stt_int_flw, end_int_flw, remark,
+        del_flg, ver_id, cre_time,
+        cre_usr, upd_time, upd_usr
+        )
+        values (#{feeRateCfgId,jdbcType=BIGINT}, #{feeRuleCfgId,jdbcType=BIGINT}, #{rateNam,jdbcType=VARCHAR},
+        #{setMthd,jdbcType=CHAR}, #{chrgStdType,jdbcType=CHAR}, #{chrgStd,jdbcType=VARCHAR},
+        #{sttIntFlw,jdbcType=DECIMAL}, #{endIntFlw,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
+        #{delFlg,jdbcType=CHAR}, #{verId,jdbcType=BIGINT}, #{creTime,jdbcType=TIMESTAMP},
+        #{creUsr,jdbcType=BIGINT}, #{updTime,jdbcType=TIMESTAMP}, #{updUsr,jdbcType=BIGINT}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.gte.domain.agent.FundFeeRateCfgHis">
+        <selectKey keyProperty="feeRateCfgHisId" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into fund_fee_rate_cfg_his
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feeRateCfgId != null">
+                fee_rate_cfg_id,
+            </if>
+            <if test="feeRuleCfgId != null">
+                fee_rule_cfg_id,
+            </if>
+            <if test="rateNam != null">
+                rate_nam,
+            </if>
+            <if test="setMthd != null">
+                set_mthd,
+            </if>
+            <if test="chrgStdType != null">
+                chrg_std_type,
+            </if>
+            <if test="chrgStd != null">
+                chrg_std,
+            </if>
+            <if test="sttIntFlw != null">
+                stt_int_flw,
+            </if>
+            <if test="endIntFlw != null">
+                end_int_flw,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="delFlg != null">
+                del_flg,
+            </if>
+            <if test="verId != null">
+                ver_id,
+            </if>
+            <if test="creTime != null">
+                cre_time,
+            </if>
+            <if test="creUsr != null">
+                cre_usr,
+            </if>
+            <if test="updTime != null">
+                upd_time,
+            </if>
+            <if test="updUsr != null">
+                upd_usr,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feeRateCfgId != null">
+                #{feeRateCfgId,jdbcType=BIGINT},
+            </if>
+            <if test="feeRuleCfgId != null">
+                #{feeRuleCfgId,jdbcType=BIGINT},
+            </if>
+            <if test="rateNam != null">
+                #{rateNam,jdbcType=VARCHAR},
+            </if>
+            <if test="setMthd != null">
+                #{setMthd,jdbcType=CHAR},
+            </if>
+            <if test="chrgStdType != null">
+                #{chrgStdType,jdbcType=CHAR},
+            </if>
+            <if test="chrgStd != null">
+                #{chrgStd,jdbcType=VARCHAR},
+            </if>
+            <if test="sttIntFlw != null">
+                #{sttIntFlw,jdbcType=DECIMAL},
+            </if>
+            <if test="endIntFlw != null">
+                #{endIntFlw,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlg != null">
+                #{delFlg,jdbcType=CHAR},
+            </if>
+            <if test="verId != null">
+                #{verId,jdbcType=BIGINT},
+            </if>
+            <if test="creTime != null">
+                #{creTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creUsr != null">
+                #{creUsr,jdbcType=BIGINT},
+            </if>
+            <if test="updTime != null">
+                #{updTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updUsr != null">
+                #{updUsr,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gte.domain.agent.FundFeeRateCfgHis">
+        update fund_fee_rate_cfg_his
+        <set>
+            <if test="feeRateCfgId != null">
+                fee_rate_cfg_id = #{feeRateCfgId,jdbcType=BIGINT},
+            </if>
+            <if test="feeRuleCfgId != null">
+                fee_rule_cfg_id = #{feeRuleCfgId,jdbcType=BIGINT},
+            </if>
+            <if test="rateNam != null">
+                rate_nam = #{rateNam,jdbcType=VARCHAR},
+            </if>
+            <if test="setMthd != null">
+                set_mthd = #{setMthd,jdbcType=CHAR},
+            </if>
+            <if test="chrgStdType != null">
+                chrg_std_type = #{chrgStdType,jdbcType=CHAR},
+            </if>
+            <if test="chrgStd != null">
+                chrg_std = #{chrgStd,jdbcType=VARCHAR},
+            </if>
+            <if test="sttIntFlw != null">
+                stt_int_flw = #{sttIntFlw,jdbcType=DECIMAL},
+            </if>
+            <if test="endIntFlw != null">
+                end_int_flw = #{endIntFlw,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlg != null">
+                del_flg = #{delFlg,jdbcType=CHAR},
+            </if>
+            <if test="verId != null">
+                ver_id = #{verId,jdbcType=BIGINT},
+            </if>
+            <if test="creTime != null">
+                cre_time = #{creTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creUsr != null">
+                cre_usr = #{creUsr,jdbcType=BIGINT},
+            </if>
+            <if test="updTime != null">
+                upd_time = #{updTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updUsr != null">
+                upd_usr = #{updUsr,jdbcType=BIGINT},
+            </if>
+        </set>
+        where fee_rate_cfg_his_id = #{feeRateCfgHisId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gte.domain.agent.FundFeeRateCfgHis">
+    update fund_fee_rate_cfg_his
+    set fee_rate_cfg_id = #{feeRateCfgId,jdbcType=BIGINT},
+      fee_rule_cfg_id = #{feeRuleCfgId,jdbcType=BIGINT},
+      rate_nam = #{rateNam,jdbcType=VARCHAR},
+      set_mthd = #{setMthd,jdbcType=CHAR},
+      chrg_std_type = #{chrgStdType,jdbcType=CHAR},
+      chrg_std = #{chrgStd,jdbcType=VARCHAR},
+      stt_int_flw = #{sttIntFlw,jdbcType=DECIMAL},
+      end_int_flw = #{endIntFlw,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      del_flg = #{delFlg,jdbcType=CHAR},
+      ver_id = #{verId,jdbcType=BIGINT},
+      cre_time = #{creTime,jdbcType=TIMESTAMP},
+      cre_usr = #{creUsr,jdbcType=BIGINT},
+      upd_time = #{updTime,jdbcType=TIMESTAMP},
+      upd_usr = #{updUsr,jdbcType=BIGINT}
+    where fee_rate_cfg_his_id = #{feeRateCfgHisId,jdbcType=BIGINT}
+  </update>
+</mapper>

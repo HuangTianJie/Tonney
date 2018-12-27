@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+	xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd 
+                        http://www.dangdang.com/schema/ddframe/reg 
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+                        http://www.dangdang.com/schema/ddframe/job 
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd">
+
+	<!--<reg:zookeeper id="regCenterManager" server-lists="${gop.job.name-servcers}"-->
+								 <!--namespace="regCenterManager" base-sleep-time-milliseconds="1000"-->
+								 <!--max-sleep-time-milliseconds="3000" max-retries="3"/>-->
+
+	<!--<job:simple id="userAssetStatus" class="com.gop.job.UserAssetStatusJob"
+		registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+		sharding-total-count="1" failover="false" monitor-execution="false" />
+	<job:simple id="platAssetStatus" class="com.gop.job.PlatAssetStatusJob"
+							registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />
+	<job:simple id="platAssetProess" class="com.gop.job.PlatAssetProessJob"
+							registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />
+	<job:simple id="walletBalance" class="com.gop.job.WalletBalanceJob"
+							registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />
+	<job:simple id="walletInOut" class="com.gop.job.WalletInOutJob"
+							registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />
+	<job:simple id="financeTotal" class="com.gop.job.FinanceTotalJob"
+							registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />
+	&lt;!&ndash; 财务日报表  每五分钟执行： 0 */10 * * * ? *  每天执行：   0 30 0 * * ? *  &ndash;&gt;
+	<job:simple id="sendReportJob" class="com.gop.job.SendReportJob"
+							registry-center-ref="regCenterManager" cron="0 30 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />
+	<job:simple id="userDailyStatisticJob" class="com.gop.job.UserDailyStatisticJob"
+							registry-center-ref="regCenterManager" cron="0 0 0 * * ? *" overwrite="true"
+							sharding-total-count="1" failover="false" monitor-execution="false" />-->
+</beans>

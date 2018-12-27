@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gte.mapper.CountryAreaMapper">
+	<resultMap id="BaseResultMap" type="com.gte.domain.CountryArea">
+		<id column="country_id" property="countryid" jdbcType="INTEGER" />
+		<result column="country_code" property="countrycode" jdbcType="VARCHAR" />
+		<result column="country_name" property="countryname" jdbcType="VARCHAR" />
+		<result column="country_num" property="countrynum" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="ft_name" property="ftname" jdbcType="VARCHAR" />
+		<result column="eng_name" property="engname" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+	country_id, country_code, country_name, country_num,status, ft_name, eng_name
+	</sql>
+
+	<select id="getList" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from country_area
+	</select>
+		
+	<insert id="addCountry" parameterType="com.gte.domain.CountryArea">
+		insert intocountry_area (country_code, country_name,country_num,ft_name,eng_name)
+		values (
+		#{countrycode,jdbcType=VARCHAR},
+		#{countryname,jdbcType=VARCHAR},
+		#{countrynum,jdbcType=VARCHAR},
+		#{ftname,jdbcType=VARCHAR},
+		#{engname,jdbcType=VARCHAR}
+		)
+	</insert>
+		
+	<update id="updateStatus" parameterType="com.gte.domain.CountryArea" >
+		 update intocountry_area set status = #{status,jdbcType=INTEGER}  where country_id = #{countryid,jdbcType=INTEGER}
+	</update>
+</mapper>

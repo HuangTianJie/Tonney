@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gop.mapper.FinanceDetailMapper">
+	<resultMap id="BaseResultMap" type="com.gop.domain.FinanceDetail">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="uid" property="uid" jdbcType="INTEGER" />
+		<result column="asset_change_type" property="assetChangeType"
+			jdbcType="TINYINT" />
+		<result column="asset_code" property="assetCode" jdbcType="VARCHAR" />
+		<result column="request_no" property="requestNo" jdbcType="CHAR" />
+		<result column="business_subject" property="businessSubject"
+			jdbcType="VARCHAR" />
+		<result column="amount_available" property="amountAvailable"
+			jdbcType="DECIMAL" />
+		<result column="amount_lock" property="amountLock" jdbcType="DECIMAL" />
+		<result column="amount_loan" property="amountLoan" jdbcType="DECIMAL" />
+		<result column="balance_old_available" property="balanceOldAvailable"
+			jdbcType="DECIMAL" />
+		<result column="balance_old_lock" property="balanceOldLock"
+			jdbcType="DECIMAL" />
+		<result column="balance_old_loan" property="balanceOldLoan"
+			jdbcType="DECIMAL" />
+		<result column="balance_new_available" property="balanceNewAvailable"
+			jdbcType="DECIMAL" />
+		<result column="balance_new_lock" property="balanceNewLock"
+			jdbcType="DECIMAL" />
+		<result column="balance_new_loan" property="balanceNewLoan"
+			jdbcType="DECIMAL" />
+
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uid, asset_code, request_no, business_subject,
+		amount_available,
+		amount_lock, amount_loan, balance_old_available,
+		balance_old_lock,
+		balance_old_loan,
+		balance_new_available,
+		balance_new_lock, balance_new_loan, create_date,asset_change_type
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from finance_detail
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		finance_detail
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.gop.domain.FinanceDetail">
+		insert into finance_detail
+		(id, uid, asset_code,
+		request_no, business_subject, amount_available,
+		amount_lock,
+		amount_loan, balance_old_available, balance_old_lock,
+		balance_old_loan, balance_new_available, balance_new_lock,
+		balance_new_loan, create_date)
+		values (#{id,jdbcType=INTEGER},
+		#{uid,jdbcType=INTEGER},
+		#{assetCode,jdbcType=VARCHAR},
+		#{requestNo,jdbcType=CHAR},
+		#{businessSubject,jdbcType=VARCHAR},#{amountAvailable,jdbcType=DECIMAL},
+		#{amountLock,jdbcType=DECIMAL},
+		#{amountLoan,jdbcType=DECIMAL},
+		#{balanceOldAvailable,jdbcType=DECIMAL},
+		#{balanceOldLock,jdbcType=DECIMAL},
+		#{balanceOldLoan,jdbcType=DECIMAL},
+		#{balanceNewAvailable,jdbcType=DECIMAL},
+		#{balanceNewLock,jdbcType=DECIMAL},
+		#{balanceNewLoan,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.gop.domain.FinanceDetail">
+		insert into finance_detail
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="assetCode != null">
+				asset_code,
+			</if>
+			<if test="requestNo != null">
+				request_no,
+			</if>
+			<if test="businessSubject != null">
+				business_subject,
+			</if>
+			<if test="amountAvailable != null">
+				amount_available,
+			</if>
+			<if test="amountLock != null">
+				amount_lock,
+			</if>
+			<if test="amountLoan != null">
+				amount_loan,
+			</if>
+			<if test="balanceOldAvailable != null">
+				balance_old_available,
+			</if>
+			<if test="balanceOldLock != null">
+				balance_old_lock,
+			</if>
+			<if test="balanceOldLoan != null">
+				balance_old_loan,
+			</if>
+			<if test="balanceNewAvailable != null">
+				balance_new_available,
+			</if>
+			<if test="balanceNewLock != null">
+				balance_new_lock,
+			</if>
+			<if test="balanceNewLoan != null">
+				balance_new_loan,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="assetChangeType != null">
+				asset_change_type,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="assetCode != null">
+				#{assetCode,jdbcType=VARCHAR},
+			</if>
+			<if test="requestNo != null">
+				#{requestNo,jdbcType=CHAR},
+			</if>
+			<if test="businessSubject != null">
+				#{businessSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="amountAvailable != null">
+				#{amountAvailable,jdbcType=DECIMAL},
+			</if>
+			<if test="amountLock != null">
+				#{amountLock,jdbcType=DECIMAL},
+			</if>
+			<if test="amountLoan != null">
+				#{amountLoan,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceOldAvailable != null">
+				#{balanceOldAvailable,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceOldLock != null">
+				#{balanceOldLock,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceOldLoan != null">
+				#{balanceOldLoan,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceNewAvailable != null">
+				#{balanceNewAvailable,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceNewLock != null">
+				#{balanceNewLock,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceNewLoan != null">
+				#{balanceNewLoan,jdbcType=DECIMAL},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assetChangeType != null">
+				#{assetChangeType,jdbcType=TINYINT},
+			</if>
+
+
+		</trim>
+	</insert>
+	<insert id="insertBatch" parameterType="java.util.List">
+		insert into finance_detail ( uid, asset_code,
+		request_no,
+		business_subject, amount_available,
+		amount_lock,
+		amount_loan,
+		balance_old_available, balance_old_lock,
+		balance_old_loan,
+		balance_new_available, balance_new_lock,
+		balance_new_loan,
+		asset_change_type,create_date)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.uid,jdbcType=INTEGER},
+			#{item.assetCode,jdbcType=VARCHAR},
+			#{item.requestNo,jdbcType=CHAR},
+			#{item.businessSubject,jdbcType=VARCHAR},
+			#{item.amountAvailable,jdbcType=DECIMAL},
+			#{item.amountLock,jdbcType=DECIMAL},
+			#{item.amountLoan,jdbcType=DECIMAL},
+			#{item.balanceOldAvailable,jdbcType=DECIMAL},
+			#{item.balanceOldLock,jdbcType=DECIMAL},
+			#{item.balanceOldLoan,jdbcType=DECIMAL},
+			#{item.balanceNewAvailable,jdbcType=DECIMAL},
+			#{item.balanceNewLock,jdbcType=DECIMAL},
+			#{item.balanceNewLoan,jdbcType=DECIMAL},
+			#{item.assetChangeType,jdbcType=TINYINT},
+			#{item.createDate,jdbcType=TIMESTAMP})
+		</foreach>
+
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.gop.domain.FinanceDetail">
+		update finance_detail
+		<set>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="assetCode != null">
+				asset_code = #{assetCode,jdbcType=VARCHAR},
+			</if>
+			<if test="requestNo != null">
+				request_no = #{requestNo,jdbcType=CHAR},
+			</if>
+			<if test="businessSubject != null">
+				business_subject = #{businessSubject,jdbcType=VARCHAR},
+			</if>
+			<if test="amountAvailable != null">
+				amount_available = #{amountAvailable,jdbcType=DECIMAL},
+			</if>
+			<if test="amountLock != null">
+				amount_lock = #{amountLock,jdbcType=DECIMAL},
+			</if>
+			<if test="amountLoan != null">
+				amount_loan = #{amountLoan,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceOldAvailable != null">
+				balance_old_available =
+				#{balanceOldAvailable,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceOldLock != null">
+				balance_old_lock = #{balanceOldLock,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceOldLoan != null">
+				balance_old_loan = #{balanceOldLoan,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceNewAvailable != null">
+				balance_new_available =
+				#{balanceNewAvailable,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceNewLock != null">
+				balance_new_lock = #{balanceNewLock,jdbcType=DECIMAL},
+			</if>
+			<if test="balanceNewLoan != null">
+				balance_new_loan = #{balanceNewLoan,jdbcType=DECIMAL},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="assetChangeType != null">
+				asset_change_type = #{assetChangeType,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.gop.domain.FinanceDetail">
+		update
+		finance_detail
+		set uid = #{uid,jdbcType=INTEGER},
+		asset_code =
+		#{assetCode,jdbcType=VARCHAR},
+		request_no = #{requestNo,jdbcType=CHAR},
+		business_subject = #{businessSubject,jdbcType=VARCHAR},
+		amount_available = #{amountAvailable,jdbcType=DECIMAL},
+		amount_lock =
+		#{amountLock,jdbcType=DECIMAL},
+		amount_loan =
+		#{amountLoan,jdbcType=DECIMAL},
+		balance_old_available =
+		#{balanceOldAvailable,jdbcType=DECIMAL},
+		balance_old_lock =
+		#{balanceOldLock,jdbcType=DECIMAL},
+		balance_old_loan =
+		#{balanceOldLoan,jdbcType=DECIMAL},
+		balance_new_available =
+		#{balanceNewAvailable,jdbcType=DECIMAL},
+		balance_new_lock =
+		#{balanceNewLock,jdbcType=DECIMAL},
+		balance_new_loan =
+		#{balanceNewLoan,jdbcType=DECIMAL},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+	<!-- 自定义方法 -->
+	<select id="selectByUidAndAssetCode" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		finance_detail
+		where
+		uid = #{uid,jdbcType=INTEGER}
+		<if test="assetCode != null">
+			and asset_code = #{assetCode,jdbcType=VARCHAR}
+		</if>
+		and asset_change_type=1
+	</select>
+
+	<select id="selectByUidAndType" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		finance_detail
+		where
+		uid = #{uid,jdbcType=INTEGER}
+		<if test="flag &gt; 0">
+			and amount_available <![CDATA[ >= ]]>
+			0
+		</if>
+		<if test="flag &lt; 0">
+			and amount_available <![CDATA[ < ]]>
+			0
+		</if>
+		and ( business_subject = 'DEPOSIT' or business_subject = 'WITHDRAW')
+	</select>
+
+
+</mapper>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gte.mapper.sector.ConfigSectorMapper">
+    <resultMap id="BaseResultMap" type="com.gte.domain.sector.dto.ConfigSector">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sector" jdbcType="CHAR" property="sector"/>
+        <result column="asset_code" jdbcType="VARCHAR" property="assetCode"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, sector, asset_code
+    </sql>
+
+    <resultMap id="AssetCodeResultMap" type="com.gop.domain.ConfigAsset">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="asset_code" property="assetCode" jdbcType="VARCHAR"/>
+        <result column="currency_type" property="currencyType"
+                jdbcType="CHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="supply_amount" property="supplyAmount"
+                jdbcType="DECIMAL"/>
+        <result column="total_amount" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="min_precision" property="minPrecision"
+                jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="web_url" property="webUrl" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="AssetCode_Column_List">
+        a.id, a.asset_code, a.currency_type, a.status, a.name, a.supply_amount, a.total_amount,
+        a.min_precision,
+        a.description, a.web_url, a.create_date, a.update_date
+    </sql>
+
+    <resultMap id="SymbolResultMap" type="com.gop.domain.ConfigSymbol">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="symbol" property="symbol" jdbcType="VARCHAR"/>
+        <result column="asset_code1" property="assetCode1" jdbcType="VARCHAR"/>
+        <result column="asset_code2" property="assetCode2" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="min_amount1" property="minAmount1" jdbcType="DECIMAL"/>
+        <result column="min_amount2" property="minAmount2" jdbcType="DECIMAL"/>
+        <result column="max_amount1" property="maxAmount1" jdbcType="DECIMAL"/>
+        <result column="max_amount2" property="maxAmount2" jdbcType="DECIMAL"/>
+        <result column="min_precision1" property="minPrecision1"
+                jdbcType="DECIMAL"/>
+        <result column="min_precision2" property="minPrecision2"
+                jdbcType="DECIMAL"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Symbol_Column_List">
+        t.id, t.symbol, t.asset_code1, t.asset_code2, t.status, t.title, t.name,
+        t.description,
+        t.min_amount1,
+        t.min_amount2, t.max_amount1,
+        t.max_amount2, t.min_precision1, t.min_precision2,
+        t.create_date, t.update_date
+    </sql>
+
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from config_sector
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from config_sector
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.gte.domain.sector.dto.ConfigSector">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into config_sector (sector, asset_code)
+        values (#{sector,jdbcType=CHAR}, #{assetCode,jdbcType=VARCHAR})
+    </insert>
+    <insert id="save" parameterType="com.gte.domain.sector.dto.ConfigSector">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into config_sector (sector, asset_code)
+        values (#{sector,jdbcType=CHAR}, #{assetCode,jdbcType=VARCHAR}) ON DUPLICATE KEY UPDATE sector=VALUES(sector);
+    </insert>
+    <insert id="insertSelective" parameterType="com.gte.domain.sector.dto.ConfigSector">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into config_sector
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sector != null">
+                sector,
+            </if>
+            <if test="assetCode != null">
+                asset_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sector != null">
+                #{sector,jdbcType=CHAR},
+            </if>
+            <if test="assetCode != null">
+                #{assetCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectByPrimaryKeySelective" parameterType="com.gte.domain.sector.dto.ConfigSector"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from config_sector
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="sector != null">
+                and sector = #{sector}
+            </if>
+            <if test="assetCode != null">
+                and asset_code = #{assetCode}
+            </if>
+        </where>
+        ORDER BY  id DESC
+    </select>
+    <select id="getAssetCodeBySector" resultMap="AssetCodeResultMap">
+        select
+        <include refid="AssetCode_Column_List"/>
+        from config_asset a left JOIN config_sector b on a.asset_code=b.asset_code
+        <where>
+            <if test="sector != null">
+                and b.sector = #{sector}
+            </if>
+            <if test="assetCode != null">
+                and b.asset_code = #{assetCode}
+            </if>
+            <if test="currencyType != null">
+                and a.currency_type = #{currencyType}
+            </if>
+        </where>
+    </select>
+    <select id="getConfigSymbolListByCondition" resultMap="SymbolResultMap">
+        select
+        <include refid="Symbol_Column_List"/>
+        from config_symbol t
+        left join config_asset asset on t.asset_code2= asset.asset_code
+        left join config_sector sector on asset.asset_code=sector.asset_code
+        <where>
+            <if test="sector != null">
+                and sector.sector = #{sector}
+            </if>
+            <if test="assetCode != null">
+                and sector.asset_code = #{assetCode}
+            </if>
+            <if test="currencyType != null">
+                and asset.currency_type = #{currencyType}
+            </if>
+        </where>
+    </select>
+    <resultMap id="ConfigAssetProfileResultMap" type="com.gop.domain.ConfigAssetProfile">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="asset_code" property="assetCode" jdbcType="VARCHAR" />
+        <result column="profile_key" property="profileKey" jdbcType="VARCHAR"
+                typeHandler="com.gop.mapper.ConfigAssetTypeHandler" />
+
+        <result column="profile_value" property="profileValue"
+                jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Config_Asset_Profile_Column_List">
+        t.id, t.asset_code, t.profile_key,
+        t.profile_value,
+        t.create_date,
+        t.update_date
+    </sql>
+    <select id="getConfigAssetProfile" resultMap="ConfigAssetProfileResultMap">
+        select
+        <include refid="Config_Asset_Profile_Column_List" />
+        from config_asset_profile  t
+        left join config_asset asset on t.asset_code= asset.asset_code
+        left join config_sector sector on asset.asset_code=sector.asset_code
+        <where>
+            <if test="profileKey != null">
+               and  t.profile_key =
+                #{profileKey,typeHandler=com.gop.mapper.ConfigAssetTypeHandler}
+            </if>
+
+            <if test="sector != null">
+                and sector.sector = #{sector}
+            </if>
+            <if test="assetCode != null">
+                and sector.asset_code = #{assetCode}
+            </if>
+            <if test="currencyType != null">
+                and asset.currency_type = #{currencyType}
+            </if>
+        </where>
+    </select>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gte.domain.sector.dto.ConfigSector">
+        update config_sector
+        <set>
+            <if test="sector != null">
+                sector = #{sector,jdbcType=CHAR},
+            </if>
+            <if test="assetCode != null">
+                asset_code = #{assetCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gte.domain.sector.dto.ConfigSector">
+    update config_sector
+    set sector = #{sector,jdbcType=CHAR},
+      asset_code = #{assetCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByAssetCodeSelective" parameterType="com.gte.domain.sector.dto.ConfigSector">
+        update config_sector
+        <set>
+            <if test="sector != null">
+                sector = #{sector,jdbcType=CHAR},
+            </if>
+        </set>
+        where asset_code = #{assetCode,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gte.mapper.collection.FundAcctBalMapper">
+	<resultMap id="BaseResultMap" type="com.gte.domain.dto.FundAcctBalDto">
+		<result column="asset_code" property="assetsCode" jdbcType="VARCHAR" />
+		<result column="amount_available" property="amountAvailable" jdbcType="DECIMAL" />
+		<result column="amount_lock" property="amountLock" jdbcType="DECIMAL" />
+		<result column="amount_total" property="amountTotal" jdbcType="DECIMAL" />
+	</resultMap>
+	<select id="getFundAcctBalByAssetCode" resultMap="BaseResultMap" parameterType="com.gte.domain.dto.FundAcctBalDto">
+select
+	a.asset_code,
+	a.amount_available,
+	a.amount_lock,
+  IFNULL(a.amount_available,0) + IFNULL(a.amount_lock,10) amount_total
+from
+	fund_acct_bal a,
+	fund_acct b
+where
+	a.acct_cd = b.acct_cd
+and b.subj_cd = '1101002'
+<if test='assetsCode != null and assetsCode !=""'>
+and a.asset_code = #{assetsCode}
+</if>
+	</select>   
+</mapper>

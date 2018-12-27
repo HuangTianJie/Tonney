@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gte.mapper.agent.AgentMapper">
+    <resultMap id="BaseResultMap" type="com.gte.domain.agent.Agent">
+        <id column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="agent_name" property="agentName" jdbcType="CHAR"/>
+        <result column="business_licence" property="businessLicence" jdbcType="CHAR"/>
+        <result column="url" property="url" jdbcType="CHAR"/>
+        <result column="code" property="code" jdbcType="CHAR"/>
+        <result column="rule_id" property="ruleId" jdbcType="INTEGER"/>
+        <result column="day" property="day" jdbcType="INTEGER"/>
+
+        <result column="op_name" property="opName" jdbcType="CHAR"/>
+        <result column="mobile" property="mobile" jdbcType="CHAR"/>
+        <result column="login_password" property="loginPassword"
+                jdbcType="CHAR"/>
+        <result column="locked" property="locked" jdbcType="CHAR"/>
+        <result column="role" property="role" jdbcType="CHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="createip" property="createip" jdbcType="CHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="updateip" property="updateip" jdbcType="CHAR"/>
+        <result column="create_admin_id" property="createAdminId"
+                jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		a.admin_id,b.agent_name,b.business_licence,
+		b.url,b.code,b.rule_id,b.day,
+		a.op_name, a.mobile,
+		a.login_password, b.locked, a.role,
+		a.create_date, a.createip,
+		a.update_date,
+		a.updateip, a.create_admin_id
+	</sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from administrators a right join agent b on a.admin_id = b.admin_id
+        where b.admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+
+    <insert id="insert" parameterType="com.gte.domain.agent.Agent">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into agent (admin_id, agent_name, business_licence,rule_id,day,
+        locked)
+        values (#{adminId,jdbcType=INTEGER}, #{agentName,jdbcType=CHAR},
+        #{businessLicence,jdbcType=CHAR},#{ruleId,jdbcType=INTEGER},#{day,jdbcType=INTEGER},
+        #{locked,jdbcType=CHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gte.domain.agent.Agent">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into agent
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">
+                admin_id,
+            </if>
+            <if test="agentName != null">
+                agent_name,
+            </if>
+            <if test="businessLicence != null">
+                business_licence,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="ruleId != null">
+                rule_id,
+            </if>
+            <if test="locked != null">
+                locked,
+            </if>
+            <if test="day != null">
+                day,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="adminId != null">
+                #{adminId,jdbcType=INTEGER},
+            </if>
+            <if test="agentName != null">
+                #{agentName,jdbcType=CHAR},
+            </if>
+            <if test="businessLicence != null">
+                #{businessLicence,jdbcType=CHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=CHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=CHAR},
+            </if>
+            <if test="ruleId != null">
+                #{ruleId,jdbcType=CHAR},
+            </if>
+            <if test="locked != null">
+                #{locked,jdbcType=CHAR},
+            </if>
+            <if test="day != null">
+                #{day,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gte.domain.agent.Agent">
+        update agent
+        <set>
+            <if test="agentName != null">
+                agent_name = #{agentName,jdbcType=CHAR},
+            </if>
+            <if test="businessLicence != null">
+                business_licence = #{businessLicence,jdbcType=CHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=CHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=CHAR},
+            </if>
+            <if test="ruleId != null">
+                rule_id = #{ruleId,jdbcType=CHAR},
+            </if>
+            <if test="locked != null">
+                locked = #{locked,jdbcType=CHAR},
+            </if>
+            <if test="day != null">
+                day = #{day,jdbcType=CHAR},
+            </if>
+
+        </set>
+        where admin_id = #{adminId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gte.domain.agent.Agent">
+		update agent
+		set agent_name = #{agentName,jdbcType=CHAR},
+            business_licence = #{businessLicence,jdbcType=CHAR},
+            url = #{url,jdbcType=CHAR},
+            code = #{code,jdbcType=CHAR},
+            rule_id = #{ruleId,jdbcType=CHAR},
+            locked = #{locked,jdbcType=CHAR},
+            day = #{day,jdbcType=CHAR}
+		where admin_id = #{adminId,jdbcType=INTEGER}
+	</update>
+    <select id="selectByAccount" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from administrators a join agent b on a.admin_id = b.admin_id
+        where a.mobile = #{mobile,jdbcType=CHAR}
+    </select>
+    <select id="getAgentList" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from administrators a join agent b on a.admin_id = b.admin_id
+    </select>
+</mapper>

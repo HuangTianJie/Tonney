@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+	xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd 
+                        http://www.dangdang.com/schema/ddframe/reg 
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd 
+                        http://www.dangdang.com/schema/ddframe/job 
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd">
+
+
+
+	<reg:zookeeper id="regCenterC2C" server-lists="${gop.job.name-servcers}"
+		namespace="ourdaxc2c" base-sleep-time-milliseconds="1000"
+		max-sleep-time-milliseconds="3000" max-retries="3" />
+
+	<job:simple id="simpleElasticJob1" class="com.gop.job.C2cOvertimePayJob"
+		registry-center-ref="regCenterC2C" cron="0/59 * * * * ?"
+		sharding-total-count="1" failover="false" monitor-execution="false" />
+</beans>

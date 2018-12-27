@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gte.mapper.valuation.CoinExchangeRateMapper">
+	<resultMap id="BaseResultMap" type="com.gte.domain.dto.ExchangeRateDto">
+		<result column="current_coin" property="currentCoin" jdbcType="VARCHAR" />
+		<result column="target_coin" property="targetCoin" jdbcType="VARCHAR" />
+		<result column="exchange_rate" property="exchangeRate" jdbcType="DECIMAL" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+      current_coin, target_coin, exchange_rate, create_time, update_time
+	</sql>
+
+	<select id="getCoinExchangeRates" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List" />
+		from coin_exchange_rate
+	</select>
+	  <insert id="insertCoinExchangeRate" parameterType="com.gte.domain.dto.ExchangeRateDto">
+    insert into coin_exchange_rate (
+	<include refid="Base_Column_List" />
+      )
+    values ( #{currentCoin,jdbcType=VARCHAR}, #{targetCoin,jdbcType=VARCHAR}, 
+      #{exchangeRate,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  	<update id="updateByCurrentCoins" parameterType="java.util.List">
+<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+        update coin_exchange_rate
+        <set>
+                    exchange_rate=#{item.exchangeRate,jdbcType=DECIMAL},
+                    update_time=#{item.updateTime,jdbcType=TIMESTAMP}
+        </set>
+        where current_coin = #{item.currentCoin,jdbcType=VARCHAR}
+    </foreach>     
+	</update>
+</mapper>
